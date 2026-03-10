@@ -1,0 +1,47 @@
+ARAHAN TUGAS001 – CRUD Buku (MySQL)
+===========================================
+
+1. SETUP DATABASE (phpMyAdmin):
+   - Login phpMyAdmin (http://localhost/phpmyadmin)
+   - Pilih database "perpustakaan"
+   - Jalankan SQL ini:
+
+USE perpustakaan;
+
+CREATE TABLE buku (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    judul VARCHAR(100) NOT NULL,
+    penulis VARCHAR(50) NOT NULL,
+    tahun_terbit YEAR NOT NULL,
+    stok INT DEFAULT 1 CHECK (stok >= 0)
+);
+
+INSERT INTO buku (judul, penulis, tahun_terbit, stok) VALUES
+('Clean Code', 'Robert C. Martin', 2008, 5),
+('Effective Java', 'Joshua Bloch', 2017, 3),
+('Head First Java', 'Kathy Sierra', 2005, 7);
+
+2. ISI TODO di 4 file:
+   - Buku.java (model)
+   - DatabaseUtils.java (helper)
+   - BukuRepository.java (4 method CRUD)
+   - App.java (demo console)
+
+3. TEST:
+   # 1. Pastikan compile OK
+   mvn clean compile
+
+   # 2. Copy dependencies ke target/lib
+   mvn dependency:copy-dependencies
+
+   # 3. Cek folder target/lib ada mysql-connector-java-*.jar
+   dir target\dependency
+
+   # 4. Jalankan
+   java -cp "target/classes;target/dependency/*" edu.pradita.oop.session05.App
+
+Expected output:
+1. READ ALL → tampil 3+ buku sample
+2. CREATE → tambah buku baru
+3. UPDATE → ubah stok
+4. DELETE → hapus buku
