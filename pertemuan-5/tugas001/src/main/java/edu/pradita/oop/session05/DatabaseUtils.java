@@ -17,6 +17,6 @@ public class DatabaseUtils {
      */
     public static Connection getConnection() throws SQLException {
         // TODO: implement DriverManager.getConnection(URL, USERNAME, PASSWORD)
-        return null;
+        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 }

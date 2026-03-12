@@ -17,32 +17,53 @@ public class Buku {
     // TODO 2: Constructor lengkap (semua field)
     public Buku(int id, String judul, String penulis, int tahunTerbit, int stok) {
         // TODO: assign semua field
+        this.id = id;
+        this.judul = judul;
+        this.penulis = penulis;
+        this.tahunTerbit = tahunTerbit;
+        this.stok = stok;
     }
 
     // TODO 3: Getter & Setter untuk id
-    public int getId() { return 0; }
-    public void setId(int id) {}
+    public int getId() { return id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // TODO 4: Getter & Setter untuk judul
-    public String getJudul() { return null; }
-    public void setJudul(String judul) {}
+    public String getJudul() { return judul; }
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
 
     // TODO 5: Getter & Setter untuk penulis
-    public String getPenulis() { return null; }
-    public void setPenulis(String penulis) {}
+    public String getPenulis() { return penulis; }
+    public void setPenulis(String penulis) {
+        this.penulis = penulis;
+    }
 
     // TODO 6: Getter & Setter untuk tahunTerbit
-    public int getTahunTerbit() { return 0; }
-    public void setTahunTerbit(int tahunTerbit) {}
+    public int getTahunTerbit() { return tahunTerbit; }
+    public void setTahunTerbit(int tahunTerbit) {
+        this.tahunTerbit = tahunTerbit;
+    }
 
     // TODO 7: Getter & Setter untuk stok
-    public int getStok() { return 0; }
-    public void setStok(int stok) {}
+    public int getStok() { return stok; }
+    public void setStok(int stok) {
+        this.stok = stok;
+    }
 
     // TODO 8: Override toString() untuk debug
     // Format: "Buku{id=1, judul='Clean Code', penulis='Robert Martin', tahun=2008, stok=5}"
     @Override
     public String toString() {
-        return "";
+        return "Buku{" +
+                "id=" + id +
+                ", judul='" + judul + '\'' +
+                ", penulis='" + penulis + '\'' +
+                ", tahunTerbit=" + tahunTerbit +
+                ", stok=" + stok +
+                '}';
     }
 }

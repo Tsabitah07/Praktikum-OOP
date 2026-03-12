@@ -26,6 +26,26 @@ public class BukuRepository {
         // 4. Loop ResultSet → buat Buku object → tambah ke list
         // 5. Close resource
         // 6. Return list
+        Connection connection = DatabaseUtils.getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM buku");
+
+        while (rs.next()) {
+            Buku buku = new Buku();
+
+            buku.setId(rs.getInt("id"));
+            buku.setJudul(rs.getString("judul"));
+            buku.setPenulis(rs.getString("penulis"));
+            buku.setTahunTerbit(rs.getInt("tahun_terbit"));
+            buku.setStok(rs.getInt("stok"));
+
+            bukus.add(buku);
+        }
+
+        // Close resource
+        rs.close();
+        stmt.close();
+        connection.close();
 
         return bukus;
     }
@@ -42,6 +62,20 @@ public class BukuRepository {
         // 3. Set parameter: judul, penulis, tahun_terbit, stok
         // 4. executeUpdate()
         // 5. Close resource
+
+        Connection connection = DatabaseUtils.getConnection();
+
+        String sql = "INSERT INTO buku (judul, penulis, tahun_terbit, stok) VALUES (?, ?, ?, ?)";
+        PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        pstmt.setString(1, buku.getJudul());
+        pstmt.setString(2, buku.getPenulis());
+        pstmt.setInt(3, buku.getTahunTerbit());
+        pstmt.setInt(4, buku.getStok());
+
+        pstmt.executeUpdate();
+
+
     }
 
     /**
@@ -51,6 +85,14 @@ public class BukuRepository {
      */
     public void updateStok(int id, int newStok) throws SQLException {
         // TODO: PreparedStatement UPDATE
+            Connection connection = DatabaseUtils.getConnection();
+            String sql = "UPDATE buku SET stok = ? WHERE id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+            pstmt.setInt(1, newStok);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
     }
 
     /**
@@ -66,6 +108,14 @@ public class BukuRepository {
         // 2. executeUpdate()
         // 3. Return rowsAffected > 0
 
-        return false;
+        Connection connection = DatabaseUtils.getConnection();
+        String sql = "DELETE FROM buku WHERE id = ?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+
+        pstmt.setInt(1, id);
+
+        int rowsAffected = pstmt.executeUpdate();
+
+        return rowsAffected > 0;
     }
 }
